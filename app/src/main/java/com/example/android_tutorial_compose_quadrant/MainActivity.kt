@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MainLayout()
+                    ComposeQuadrantApp()
                 }
             }
         }
@@ -37,65 +37,61 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainLayout(modifier: Modifier = Modifier) {
-    Box(modifier = modifier.fillMaxSize()) {
-        Column {
-            Row(modifier = modifier.weight(0.5f)) {
-                Card(
-                    title = stringResource(id = R.string.text_composable_title),
-                    description = stringResource(id = R.string.text_composable_description),
-                    modifier = modifier
-                        .weight(0.5f)
-                        .background(color = Color.Green)
-                )
-                Card(
-                    title = stringResource(id = R.string.image_composable_title),
-                    description = stringResource(id = R.string.image_composable_description),
-                    modifier = modifier
-                        .weight(0.5f)
-                        .background(color = Color.Yellow)
-                )
-            }
-            Row(modifier = modifier.weight(0.5f)) {
-                Card(
-                    title = stringResource(id = R.string.row_composable_title),
-                    description = stringResource(id = R.string.row_composable_description),
-                    modifier = modifier
-                        .weight(0.5f)
-                        .background(color = Color.Cyan)
-                )
-                Card(
-                    title = stringResource(id = R.string.column_composable_title),
-                    description = stringResource(id = R.string.column_composable_description),
-                    modifier = modifier
-                        .weight(0.5f)
-                        .background(color = Color.Gray)
-                )
-            }
+fun ComposeQuadrantApp() {
+    Column(Modifier.fillMaxWidth()) {
+        Row(Modifier.weight(1f)) {
+            ComposableInfoCard(
+                title = stringResource(id = R.string.text_composable_title),
+                description = stringResource(id = R.string.text_composable_description),
+                modifier = Modifier
+                    .weight(1f)
+                    .background(color = Color.Green)
+            )
+            ComposableInfoCard(
+                title = stringResource(id = R.string.image_composable_title),
+                description = stringResource(id = R.string.image_composable_description),
+                modifier = Modifier
+                    .weight(1f)
+                    .background(color = Color.Yellow)
+            )
+        }
+        Row(Modifier.weight(1f)) {
+            ComposableInfoCard(
+                title = stringResource(id = R.string.row_composable_title),
+                description = stringResource(id = R.string.row_composable_description),
+                modifier = Modifier
+                    .weight(1f)
+                    .background(color = Color.Cyan)
+            )
+            ComposableInfoCard(
+                title = stringResource(id = R.string.column_composable_title),
+                description = stringResource(id = R.string.column_composable_description),
+                modifier = Modifier
+                    .weight(1f)
+                    .background(color = Color.Gray)
+            )
         }
     }
 }
 
 @Composable
-fun Card(title: String, description: String, modifier: Modifier) {
-    Box(
-        modifier = modifier.padding(16.dp),
+fun ComposableInfoCard(title: String, description: String, modifier: Modifier) {
+    Column(
+        modifier = modifier
+            .padding(16.dp)
+            .fillMaxHeight(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        Column (
-            modifier = Modifier.fillMaxHeight(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = title,
-                fontWeight = Bold,
-                modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 16.dp)
-            )
-            Text(
-                text = description,
-                textAlign = TextAlign.Justify
-            )
-        }
+        Text(
+            text = title,
+            fontWeight = Bold,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+        Text(
+            text = description,
+            textAlign = TextAlign.Justify
+        )
     }
 }
 
@@ -103,6 +99,6 @@ fun Card(title: String, description: String, modifier: Modifier) {
 @Composable
 fun DefaultPreview() {
     Android_tutorial_compose_quadrantTheme {
-        MainLayout()
+        ComposeQuadrantApp()
     }
 }
